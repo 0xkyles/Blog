@@ -1,0 +1,17 @@
+package com.example.blog.DTOs;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+public class UserDTO {
+    private int userId;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private RoleDTO role;
+    private Set<PostDTO> posts;
+}

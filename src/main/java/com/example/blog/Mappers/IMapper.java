@@ -1,0 +1,9 @@
+package com.example.blog.Mappers;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public interface IMapper<Entity, DTO> {
+    Entity toEntity(DTO d);
+    DTO toDTO(Entity e);
+}
