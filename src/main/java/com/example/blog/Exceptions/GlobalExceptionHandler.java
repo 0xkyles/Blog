@@ -20,6 +20,22 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorMessage> exceptionHandler(Exception ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(HttpStatus.NOT_FOUND.toString(), ex.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(APIException.class)
+    public ResponseEntity<ErrorMessage> APIExceptionHandler(APIException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(ex.getStatus().toString(), ex.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
         Map<String, String> map = new HashMap<>();

@@ -19,9 +19,9 @@ public class Post {
     private String summary;
     @Column(nullable = false)
     private String content;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(nullable = false, name="category_id", referencedColumnName = "categoryId")
     private Category category;
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private Set<Comment> comments;
 }

@@ -1,7 +1,12 @@
 package com.example.blog.DTOs;
 
+import com.example.blog.Entites.Post;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter

@@ -1,12 +1,14 @@
 package com.example.blog.Services;
 
 import com.example.blog.DTOs.PostDTO;
+import com.example.blog.Exceptions.APIException;
 import com.example.blog.Exceptions.ResourceNotFoundException;
 import com.example.blog.Mappers.CategoryMapper;
 import com.example.blog.Mappers.PostMapper;
 import com.example.blog.Repositories.CategoryRepository;
 import com.example.blog.Repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,14 +30,14 @@ public class PostService implements IPostService{
         );
 
         var post = postMapper.toEntity(postDTO);
-        var responseEntity = postRepository.save(post);
-        return postMapper.toDTO(responseEntity);
+        return postMapper.toDTO(postRepository.save(post));
     }
 
     @Override
     public PostDTO get(int postId) {
-        var post = postRepository.findById(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", Integer.toString(postId)));
+        var post = postRepository.findByPostId(postId).orElseThrow(
+                () -> new ResourceNotFoundException("Post", "id", Integer.toString(postId))
+        );
         return postMapper.toDTO(post);
     }
 
@@ -55,20 +57,26 @@ public class PostService implements IPostService{
 
     @Override
     public PostDTO update(int postId, PostDTO postDTO) {
-        var post = postRepository.findById(postId).orElseThrow(
+        var post = postRepository.findByPostId(postId).orElseThrow(
                 () -> new ResourceNotFoundException("Post", "id", Integer.toString(postId))
         );
+        if(postDTO.getCategory() != null){
+            var category = categoryRepository.findById(postDTO.getCategory().getCategoryId()).orElseThrow(
+                    () -> new APIException("Category is invalid", HttpStatus.BAD_REQUEST)
+            );
+            post.setCategory(category);
+        }
+
         post.setTitle(postDTO.getTitle());
         post.setContent(postDTO.getContent());
         post.setSummary(postDTO.getSummary());
-        post.setCategory(categoryMapper.toEntity(postDTO.getCategory()));
 
         return postMapper.toDTO(postRepository.save(post));
     }
 
     @Override
     public void delete(int postId) {
-        var post = postRepository.findById(postId).orElseThrow(
+        var post = postRepository.findByPostId(postId).orElseThrow(
                 () -> new ResourceNotFoundException("Post", "id", Integer.toString(postId))
         );
         postRepository.delete(post);
