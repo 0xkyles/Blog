@@ -1,12 +1,12 @@
 package com.example.blog.Services;
 
-import com.example.blog.DTOs.PostDTO;
-import com.example.blog.Mappers.CategoryMapper;
+import com.example.blog.DTOs.Requests.PostRequest;
+import com.example.blog.DTOs.Response.PostDTO;
 
 import java.util.List;
 
 public interface IPostService {
-    PostDTO add(PostDTO post);
+    PostDTO add(PostRequest post);
 
     PostDTO get(int id);
 
@@ -14,6 +14,6 @@ public interface IPostService {
 
     PostDTO getByTitle(String title);
 
-    PostDTO update(int postId, PostDTO postDTO);
+    PostDTO update(int postId, PostRequest postDTO);
     void delete(int postId);
 }

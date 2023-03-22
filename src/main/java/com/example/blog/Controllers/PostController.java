@@ -1,7 +1,8 @@
 package com.example.blog.Controllers;
 
-import com.example.blog.DTOs.PostDTO;
-import com.example.blog.Exceptions.SuccessMessage;
+import com.example.blog.DTOs.Requests.PostRequest;
+import com.example.blog.DTOs.Response.PostDTO;
+import com.example.blog.DTOs.Response.SuccessMessage;
 import com.example.blog.Services.IPostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,8 @@ public class PostController {
     private final IPostService postService;
 
     @PostMapping
-    public ResponseEntity<PostDTO> add(@RequestBody @Valid PostDTO post) {
-        return new ResponseEntity<>(postService.add(post), HttpStatus.CREATED);
+    public ResponseEntity<PostDTO> add(@RequestBody @Valid PostRequest postRequest) {
+        return new ResponseEntity<>(postService.add(postRequest), HttpStatus.CREATED);
     }
 
     @GetMapping("/{postId}")
@@ -33,8 +34,8 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostDTO> update(@PathVariable int postId, @RequestBody @Valid PostDTO postDTO) {
-        return new ResponseEntity<>(postService.update(postId, postDTO), HttpStatus.OK);
+    public ResponseEntity<PostDTO> update(@PathVariable int postId, @RequestBody @Valid PostRequest postRequest) {
+        return new ResponseEntity<>(postService.update(postId, postRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{postId}")

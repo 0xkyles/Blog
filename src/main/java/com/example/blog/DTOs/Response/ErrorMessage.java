@@ -1,4 +1,4 @@
-package com.example.blog.Exceptions;
+package com.example.blog.DTOs.Response;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

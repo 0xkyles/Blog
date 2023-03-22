@@ -20,4 +20,14 @@ public class CommentMapper implements IMapper<Comment, CommentDTO>{
     public CommentDTO toDTO(Comment e) {
         return modelMapper.map(e, CommentDTO.class);
     }
+
+    @Override
+    public CommentDTO objToDTO(Object o) {
+        return modelMapper.map(o, CommentDTO.class);
+    }
+
+    @Override
+    public Comment objToEntity(Object o) {
+        return modelMapper.map(o, Comment.class);
+    }
 }

@@ -1,7 +1,6 @@
-package com.example.blog.DTOs;
+package com.example.blog.DTOs.Response;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import com.example.blog.DTOs.CommentDTO;
 import lombok.*;
 
 import java.util.Set;
@@ -12,11 +11,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class PostDTO {
     private int postId;
-    @NotBlank(message = "title must not be blank")
     private String title;
-    @NotBlank(message = "summary must not be blank")
     private String summary;
-    @NotBlank(message = "summary must not be blank")
     private String content;
     private CategoryDTO category;
     private Set<CommentDTO> comments;

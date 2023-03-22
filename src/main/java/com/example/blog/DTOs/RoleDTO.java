@@ -1,3 +1,4 @@
+/*
 package com.example.blog.DTOs;
 
 import lombok.AllArgsConstructor;
@@ -9,3 +10,4 @@ public class RoleDTO {
     private int roleId;
     private String label;
 }
+*/

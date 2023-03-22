@@ -1,5 +1,7 @@
+/*
 package com.example.blog.DTOs;
 
+import com.example.blog.DTOs.Response.PostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,3 +17,4 @@ public class UserDTO {
     private RoleDTO role;
     private Set<PostDTO> posts;
 }
+*/
